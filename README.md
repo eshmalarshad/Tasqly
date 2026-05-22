@@ -149,7 +149,7 @@ The application works smoothly on:
 
 #  Live Demo
 
-<a href="https://tasqly.vercel.app/" target="_blank">Visit Tasqly</a>
+<a target="_blank" href="https://tasqly.vercel.app/" ">Tasqly</a>
 
 
 ---
