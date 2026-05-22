@@ -93,7 +93,7 @@ npm install @fortawesome/free-regular-svg-icons
 
 ---
 
-# 🧠 Functionality Overview
+#  Functionality Overview
 
 ## Add Todo
 
