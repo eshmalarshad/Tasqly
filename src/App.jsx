@@ -8,16 +8,15 @@ import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import './App.css'
 
 function App() {
-  const [todo, setTodo] = useState("") //input text
-  const [todos, setTodos] = useState([])//hold all todos
-  const [showfinished, setshowfinished] = useState(true)//hold all todos
-
+  const [todo, setTodo] = useState("")
+  const [todos, setTodos] = useState([])
+  const [showfinished, setshowfinished] = useState(true)
 
   useEffect(() => {
     let todoString = localStorage.getItem("todos")
     if (todoString) {
       let todos = JSON.parse(todoString)
-      setTodos(todos);
+      setTodos(todos)
     }
   }, [])
 
@@ -25,32 +24,38 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(e))
   }
 
-  const toggleFinished = (e) => {
+  const toggleFinished = () => {
     setshowfinished(!showfinished)
   }
-
-
 
   const handleEdit = (e, id) => {
     let t = todos.filter(i => i.id === id)
     setTodo(t[0].todo)
-    let newTodos = todos.filter(item => {
-      return item.id !== id;
-    });
-    setTodos(newTodos)
-    setEditId(id)
 
-  }
-  const handleDelete = (e, id) => {
     let newTodos = todos.filter(item => {
-      return item.id !== id;
-    });
+      return item.id !== id
+    })
+
     setTodos(newTodos)
     saveToLS(newTodos)
-
   }
+
+  const handleDelete = (e, id) => {
+    let newTodos = todos.filter(item => {
+      return item.id !== id
+    })
+
+    setTodos(newTodos)
+    saveToLS(newTodos)
+  }
+
   const handleAdd = () => {
-    let newTodos = [...todos, { id: uuidv4(), todo, isCompleted: false }]
+    let newTodos = [...todos, {
+      id: uuidv4(),
+      todo,
+      isCompleted: false
+    }]
+
     setTodos(newTodos)
     saveToLS(newTodos)
     setTodo("")
@@ -61,16 +66,18 @@ function App() {
   }
 
   const handleCheckbox = (e) => {
-    let id = e.target.name;
+    let id = e.target.name
+
     let index = todos.findIndex(item => {
-      return item.id === id;
+      return item.id === id
     })
-    let newTodos = [...todos];
-    newTodos[index].isCompleted = !newTodos[index].isCompleted;
+
+    let newTodos = [...todos]
+    newTodos[index].isCompleted = !newTodos[index].isCompleted
+
     setTodos(newTodos)
     saveToLS(newTodos)
   }
-
 
   return (
     <GalaxyTrail>
@@ -155,9 +162,10 @@ function App() {
 
                 <div
                   key={item.id}
-                  className="todo flex justify-between items-center gap-4 bg-white border border-violet-100 rounded-2xl px-5 py-4 shadow-sm hover:shadow-md transition-all duration-300"
+                  className="todo flex justify-between items-start gap-4 bg-white border border-violet-100 rounded-2xl px-5 py-4 shadow-sm hover:shadow-md transition-all duration-300"
                 >
 
+                  {/* Todo Text */}
                   <div className='flex gap-4 items-start flex-1 min-w-0'>
 
                     <input
@@ -165,40 +173,51 @@ function App() {
                       onChange={handleCheckbox}
                       type="checkbox"
                       checked={item.isCompleted}
-                      className='accent-violet-600 mt-1 w-4 h-4'
+                      className='accent-violet-600 mt-1 w-4 h-4 shrink-0'
                     />
 
                     <div
-                      className={`${item.isCompleted ? "line-through text-violet-300" : "text-violet-900"
-                        } break-all w-full text-[15px] leading-relaxed`}
+                      className={`${
+                        item.isCompleted
+                          ? "line-through text-violet-300"
+                          : "text-violet-900"
+                      } break-all w-full text-[15px] leading-relaxed`}
                     >
                       {item.todo}
                     </div>
 
-                    {/* Buttons */}
-                    <div className="buttons flex gap-2 shrink-0">
-
-                      <button
-                        onClick={(e) => { handleEdit(e, item.id) }}
-                        className='bg-violet-100 hover:bg-violet-200 text-violet-700 p-3 rounded-xl transition-all'
-                      >
-                        <FaRegEdit />
-                      </button>
-
-                      <button
-                        onClick={(e) => { handleDelete(e, item.id) }}
-                        className='bg-rose-100 hover:bg-rose-200 text-rose-600 p-3 rounded-xl transition-all'
-                      >
-                        <FontAwesomeIcon icon={faTrashCan} />
-                      </button>
-
-                    </div>
                   </div>
-                  )
-          })}
+
+                  {/* Buttons */}
+                  <div className="buttons flex gap-2 shrink-0">
+
+                    <button
+                      onClick={(e) => {
+                        handleEdit(e, item.id)
+                      }}
+                      className='bg-violet-100 hover:bg-violet-200 text-violet-700 p-3 rounded-xl transition-all'
+                    >
+                      <FaRegEdit />
+                    </button>
+
+                    <button
+                      onClick={(e) => {
+                        handleDelete(e, item.id)
+                      }}
+                      className='bg-rose-100 hover:bg-rose-200 text-rose-600 p-3 rounded-xl transition-all'
+                    >
+                      <FontAwesomeIcon icon={faTrashCan} />
+                    </button>
+
+                  </div>
+
                 </div>
-      </div>
+              )
+            })}
+          </div>
+
         </div>
+      </div>
     </GalaxyTrail>
   )
 }
