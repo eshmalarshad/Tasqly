@@ -147,15 +147,10 @@ The application works smoothly on:
 
 ---
 
-#  Preview
+#  Live Demo
 
-Add screenshots here after uploading project.
+https://tasqly.vercel.app/
 
-Example:
-
-```md
-![App Screenshot](./screenshots/home.png)
-```
 
 ---
 
@@ -169,3 +164,8 @@ Example:
 -  Notifications
 
 ---
+
+#  Topics / Tags
+
+react • javascript • tailwindcss • vite • todo-app • frontend • responsive-design • localstorage
+
